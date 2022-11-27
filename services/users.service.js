@@ -57,7 +57,7 @@ class UsersService {
         const newUsers = this.users.filter((user)=>{
             return user.idUser != id
         })
-
+3
         this.users = newUsers
         return this.users;
     }
