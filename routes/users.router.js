@@ -6,6 +6,11 @@ const router = express.Router()
 const UsersService = require('./../services/users.service');
 const service = new UsersService();
 
+//Validador de schemas
+const validatorHandler = require('../middlewares/validator.handler');
+const {getUserSchema,createUserSchema,updateUserSchema} = require('../schemas/users.schema');
+
+
 router.get('/', async (req, res, next)=>{
     try{
         const response = await service.find();
@@ -16,7 +21,9 @@ router.get('/', async (req, res, next)=>{
     }
 });
 
-router.get('/:id', async (req, res, next)=>{
+router.get('/:id',
+    validatorHandler(getUserSchema, 'params')
+    ,async (req, res, next)=>{
     try{
         const response = await service.findOne(req.params.id);
         res.json(response)
@@ -26,10 +33,11 @@ router.get('/:id', async (req, res, next)=>{
     }
 });
 
-router.post('/', async (req, res, next)=>{
+router.post('/',
+    validatorHandler(createUserSchema, 'body')
+    ,async (req, res, next)=>{
     try{
-        const {email,password,name, age, role} = req.body;
-        const response = await service.create(email,password,name, age, role);
+        const response = await service.create(req.body);
         res.json(response)
     }
     catch(err){
@@ -37,7 +45,10 @@ router.post('/', async (req, res, next)=>{
     }
 });
 
-router.patch('/:id', async (req, res, next)=>{
+router.patch('/:id',
+    validatorHandler(getUserSchema, 'params'),
+    validatorHandler(updateUserSchema, 'body')
+    ,async (req, res, next)=>{
     try{
         const response = await service.update(req.params.id,req.body);
         res.json(response)
@@ -47,7 +58,9 @@ router.patch('/:id', async (req, res, next)=>{
     }
 });
 
-router.delete('/:id', async (req, res, next)=>{
+router.delete('/:id', 
+    validatorHandler(getUserSchema, 'params')
+    ,async (req, res, next)=>{
     try{
         const response = await service.delete(req.params.id);
         res.json(response)

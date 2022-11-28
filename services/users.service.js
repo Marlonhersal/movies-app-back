@@ -1,6 +1,8 @@
 const {faker} =  require('@faker-js/faker')
 const boom = require('@hapi/boom');
 
+
+
 class UsersService {
     constructor (){
         this.users = []
@@ -27,7 +29,7 @@ class UsersService {
         if(!user) throw boom.notFound('El Usuario no existe')
         return user
     }
-    async create(email, password, name, age, role){
+    async create({email,password,name, age, role}){
         let newUser = {
             idUser: ++this.count,
             email,password,name, age, role

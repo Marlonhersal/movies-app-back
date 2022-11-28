@@ -5,6 +5,9 @@ const router = express.Router()
 //Servicos
 const moviesService = require('./../services/movies.service');
 const service = new moviesService();
+//Validador de schemas
+const validatorHandler = require('../middlewares/validator.handler');
+const {getMovieSchema,createMovieSchema,updateMovieSchema} = require('../schemas/movies.schema');
 
 router.get('/', async (req, res, next)=>{
     try{
@@ -16,7 +19,9 @@ router.get('/', async (req, res, next)=>{
     }
 });
 
-router.get('/:id', async (req, res, next)=>{
+router.get('/:id',
+    validatorHandler(getMovieSchema, 'params')
+    ,async (req, res, next)=>{
     try{
         const response = await service.findOne(req.params.id);
         res.json(response)
@@ -26,7 +31,9 @@ router.get('/:id', async (req, res, next)=>{
     }
 });
 
-router.post('/', async (req, res, next)=>{
+router.post('/',
+    validatorHandler(createMovieSchema, 'body'),
+    async (req, res, next)=>{
     try{
         const {name,director,actors,clasificacion,category, presentacion, poster} = req.body;
         const response = await service.create(name,director,actors,clasificacion,category, presentacion, poster);
@@ -37,7 +44,10 @@ router.post('/', async (req, res, next)=>{
     }
 });
 
-router.patch('/:id', async (req, res, next)=>{
+router.patch('/:id',
+    validatorHandler(getMovieSchema, 'params'),
+    validatorHandler(updateMovieSchema, 'body')
+    ,async (req, res, next)=>{
     try{
         const response = await service.update(req.params.id,req.body);
         res.json(response)
@@ -47,7 +57,9 @@ router.patch('/:id', async (req, res, next)=>{
     }
 });
 
-router.delete('/:id', async (req, res, next)=>{
+router.delete('/:id',
+    validatorHandler(getMovieSchema, 'params')
+    , async (req, res, next)=>{
     try{
         const response = await service.delete(req.params.id);
         res.json(response)
