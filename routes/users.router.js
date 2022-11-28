@@ -8,7 +8,7 @@ const service = new UsersService();
 
 //Validador de schemas
 const validatorHandler = require('../middlewares/validator.handler');
-const {getUserSchema,createUserSchema,updateUserSchema} = require('../schemas/users.schema');
+const {getUserSchema,createUserSchema,updateUserSchema} = require('../schemas/user.schema');
 
 
 router.get('/', async (req, res, next)=>{

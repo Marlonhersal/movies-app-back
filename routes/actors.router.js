@@ -5,8 +5,11 @@ const router = express.Router()
 //Servicos
 const actorsService = require('./../services/actors.service');
 const service = new actorsService();
+//Validador de schemas
+const validatorHandler = require('../middlewares/validator.handler');
+const {createActorSchema,updateActorSchema,getActorSchema} = require('../schemas/actor.schema');
 
-router.get('/', async (req, res, next)=>{
+router.get('/',async (req, res, next)=>{
     try{
         const response = await service.find();
         res.json(response)
@@ -16,7 +19,9 @@ router.get('/', async (req, res, next)=>{
     }
 });
 
-router.get('/:id', async (req, res, next)=>{
+router.get('/:id',
+    validatorHandler(getActorSchema, 'params')
+    ,async (req, res, next)=>{
     try{
         const response = await service.findOne(req.params.id);
         res.json(response)
@@ -26,7 +31,9 @@ router.get('/:id', async (req, res, next)=>{
     }
 });
 
-router.post('/', async (req, res, next)=>{
+router.post('/',
+    validatorHandler(createActorSchema, 'body')
+    ,async (req, res, next)=>{
     try{
         const response = await service.create(req.body);
         res.json(response)
@@ -36,7 +43,10 @@ router.post('/', async (req, res, next)=>{
     }
 });
 
-router.patch('/:id', async (req, res, next)=>{
+router.patch('/:id',
+    validatorHandler(getActorSchema, 'params'),
+    validatorHandler(updateActorSchema, 'body')
+    ,async (req, res, next)=>{
     try{
         const response = await service.update(req.params.id,req.body);
         res.json(response)
@@ -46,7 +56,9 @@ router.patch('/:id', async (req, res, next)=>{
     }
 });
 
-router.delete('/:id', async (req, res, next)=>{
+router.delete('/:id',
+    validatorHandler(getActorSchema, 'params')
+    ,async (req, res, next)=>{
     try{
         const response = await service.delete(req.params.id);
         res.json(response)

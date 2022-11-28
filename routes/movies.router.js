@@ -7,7 +7,7 @@ const moviesService = require('./../services/movies.service');
 const service = new moviesService();
 //Validador de schemas
 const validatorHandler = require('../middlewares/validator.handler');
-const {getMovieSchema,createMovieSchema,updateMovieSchema} = require('../schemas/movies.schema');
+const {getMovieSchema,createMovieSchema,updateMovieSchema} = require('../schemas/movie.schema');
 
 router.get('/', async (req, res, next)=>{
     try{
