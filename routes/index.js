@@ -9,8 +9,8 @@ const actorsRouter = require('./actors.router')
 
 function routerApi(app){
     const router = express.Router();
+    app.use('/', router)
     //Definiendo rutas
-    app.use('/app', router)
     router.use('/users', usersRouter)
     router.use('/movies', moviesRouter)
     router.use('/directors', directorsRouter)

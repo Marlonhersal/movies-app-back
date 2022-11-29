@@ -10,13 +10,6 @@ const routerApi = require('./routes/index')
 //Importando Middlewares
 const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler')
 
-//Ruta de Users
-const usersRouter = require('./routes/users.router')
-const moviesRouter = require('./routes/movies.router')
-const directorsRouter = require('./routes/directors.router')
-const actorsRouter = require('./routes/actors.router')
-
-
 
 //Convirtiendo las repuestas en JSON
 app.use(express.json());
@@ -28,13 +21,7 @@ app.get('/', (req, res)=>{
 })
 
 //Conectando con el Routing
-//routerApi(app)
-
-
-app.use('/users', usersRouter)
-app.use('/movies', moviesRouter)
-app.use('/directors', directorsRouter)
-app.use('/actors', actorsRouter)
+routerApi(app)
 
 //Llamado a los Middlewares
 
