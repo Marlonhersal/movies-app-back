@@ -17,7 +17,7 @@ function routerApi(app){
     router.use('/movies', moviesRouter)
     router.use('/directors', directorsRouter)
     router.use('/actors', actorsRouter)
-    app.use('/', router)
+    app.use('/app', router)
 }
 
 module.exports = routerApi;
