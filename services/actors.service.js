@@ -1,5 +1,7 @@
 const {faker} =  require('@faker-js/faker')
 const boom = require('@hapi/boom');
+//Sequelize
+const sequelize = require('../libs/sequelize')
 
 class actorsService {
     constructor (){
@@ -26,7 +28,9 @@ class actorsService {
     }
     
     async find(){
-        return this.actors;
+        const query = 'SELECT * FROM tasks'
+        const [data] = await sequelize.query(query)
+        return data;
     }
     async findOne(id){
         const actor = this.actors.find((actor)=>{
