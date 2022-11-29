@@ -25,7 +25,7 @@ const validatorHandler = require('./middlewares/validator.handler');
 const {getUserSchema,createUserSchema,updateUserSchema} = require('./schemas/user.schema');
 
 
-app.get('/', async (req, res, next)=>{
+app.get('/users', async (req, res, next)=>{
     try{
         const response = await service.find();
         res.json(response)
