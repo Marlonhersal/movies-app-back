@@ -27,3 +27,5 @@ app.use(errorHandler)
 app.listen(port, ()=>{
     console.log('Aplicación corriendo en el puerto ' + port)
 });
+
+module.exports = app 
