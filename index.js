@@ -13,7 +13,7 @@ app.use(express.json());
 
 
 app.get('/', (req, res)=>{
-    res.send('API REST DE PELÍCULAS')
+    res.send('API DE PELÍCULAS')
 })
 
 //Conectando con el Routing
