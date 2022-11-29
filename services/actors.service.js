@@ -3,14 +3,15 @@ const boom = require('@hapi/boom');
 
 class actorsService {
     constructor (){
-        this.actors = []
+        this.actors = [],
+        this.count = 0
         this.generate()
     }
     generate() {
-        let count = 0
+        
         for(let i = 0; i < 30; i++){
             let actor = {
-                idActor: ++count,
+                idActor: ++this.count,
                 name: faker.name.findName(),
                 age:faker.datatype.number({ min: 20, max: 60 }) ,
                 country:  faker.address.country(),

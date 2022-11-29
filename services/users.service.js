@@ -6,13 +6,13 @@ const boom = require('@hapi/boom');
 class UsersService {
     constructor (){
         this.users = []
+        this.count = 0
         this.generate()
     }
     generate() {
-        let count = 0;
         for(let i = 0; i < 30; i++){
             this.users.push({
-                idUser: ++count,
+                idUser: ++this.count,
                 email: faker.internet.email() ,
                 password: "contraseña",
                 name: faker.name.firstName(),
