@@ -12,10 +12,10 @@ const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler');
 app.use(express.json());
 
 
-app.get('/', (req, res)=>{
+/* app.get('/', (req, res)=>{
     res.send('API REST DE PELÍCULAS')
 })
-
+ */
 
 const UsersService = require('./services/users.service');
 const service = new UsersService();
