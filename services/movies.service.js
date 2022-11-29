@@ -4,10 +4,14 @@ const boom = require('@hapi/boom');
 class moviesService {
     constructor (){
         this.movies = []
-        this.count = 0
+        this.generate()
+        
+    }
+    generate() {
+        let count = 0
         for(let i = 0; i < 30; i++){
             let pelicula = {
-                idMovie: ++this.count,
+                idMovie: ++count,
                 name: faker.music.songName()  ,
                 director: faker.name.findName(),
                 actors: [],
@@ -22,6 +26,7 @@ class moviesService {
             this.movies.push(pelicula)
         }
     }
+
     
     async find(){
         return this.movies;

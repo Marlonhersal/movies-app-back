@@ -4,10 +4,14 @@ const boom = require('@hapi/boom');
 class directorsService {
     constructor (){
         this.directors = []
-        this.count = 0
+        this.generate();
+        
+    }
+    generate() {
+        let count = 0
         for(let i = 0; i < 30; i++){
             let director = {
-                idDirector: ++this.count,
+                idDirector: ++count,
                 name: faker.name.findName(),
                 age:faker.datatype.number({ min: 20, max: 60 }) ,
                 country:  faker.address.country(),
@@ -20,7 +24,6 @@ class directorsService {
             this.directors.push(director)
         }
     }
-    
     async find(){
         return this.directors;
     }

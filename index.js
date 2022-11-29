@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT|| 3000;
 //Routing
-const routerApi = require('./routes')
+const routerApi = require('./routes/index')
 //Importando Middlewares
 const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler')
 
