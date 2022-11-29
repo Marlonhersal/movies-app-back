@@ -2,6 +2,9 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT|| 3000;
+
+const cors = require('cors');
+
 //Routing
 const routerApi = require('./routes/index')
 //Importando Middlewares
@@ -11,6 +14,7 @@ const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler')
 //Convirtiendo las repuestas en JSON
 app.use(express.json());
 
+app.use(cors());
 
 app.get('/', (req, res)=>{
     res.send('API DE PELÍCULAS')

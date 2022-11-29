@@ -10,11 +10,11 @@ const actorsRouter = require('./actors.router')
 function routerApi(app){
     const router = express.Router();
     //Definiendo rutas
+    app.use('/app', router)
     router.use('/users', usersRouter)
     router.use('/movies', moviesRouter)
     router.use('/directors', directorsRouter)
     router.use('/actors', actorsRouter)
-    app.use('/app', router)
 }
 
 module.exports = routerApi;
