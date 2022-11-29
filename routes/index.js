@@ -9,8 +9,6 @@ const actorsRouter = require('./actors.router')
 
 function routerApi(app){
     const router = express.Router();
-    app.use('/api/v1', router)
-
     //Definiendo rutas
     router.use('/prueba', (req, res)=>{
         res.json({msj:"Ya puedo vivir de amor y cantar"})
@@ -19,6 +17,7 @@ function routerApi(app){
     router.use('/movies', moviesRouter)
     router.use('/directors', directorsRouter)
     router.use('/actors', actorsRouter)
+    app.use('/', router)
 }
 
 module.exports = routerApi;
