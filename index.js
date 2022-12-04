@@ -8,7 +8,7 @@ const cors = require('cors');
 //Routing
 const routerApi = require('./routes/index')
 //Importando Middlewares
-const {errorHandler,boomErrorHandler} = require('./middlewares/error.handler')
+const {errorHandler,boomErrorHandler, queryErrorHandler} = require('./middlewares/error.handler')
 
 
 //Convirtiendo las repuestas en JSON
@@ -26,6 +26,7 @@ routerApi(app)
 //Llamado a los Middlewares
 
 app.use(boomErrorHandler)
+app.use(queryErrorHandler)
 app.use(errorHandler)
 
 app.listen(port, ()=>{

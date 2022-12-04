@@ -1,68 +1,36 @@
 const {faker} =  require('@faker-js/faker')
 const boom = require('@hapi/boom');
 
+const {models} = require('../libs/sequelize')
+
 class directorsService {
     constructor (){
-        this.directors = []
-        this.count = 0
-        this.generate();
-        
-    }
-    generate() {
-        for(let i = 0; i < 30; i++){
-            let director = {
-                idDirector: ++this.count,
-                name: faker.name.findName(),
-                age:faker.datatype.number({ min: 20, max: 60 }) ,
-                country:  faker.address.country(),
-                image: faker.image.image(),
-                movies: [],
-            }
-            for(let i = 0; i < 5; i++){
-                director.movies.push(faker.music.songName())
-            }
-            this.directors.push(director)
-        }
     }
     async find(){
-        return this.directors;
+        const response = await models.Director.findAll()
+        return response;
     }
     async findOne(id){
-        const director = this.directors.find((director)=>{
-            return director.idDirector == id
+        const director = await models.Director.findByPk(id, {
+            include: 'movie'
         })
-        if(!director) throw boom.notFound('La director no existe')
+        if(!director) throw boom.notFound('El Director no existe')
         return director
     }
-    async create({name, age, country, image, movies}){
-        let newdirector = {
-            idDirector: ++this.count,
-            name, age, country, image, movies
-        }
-
-        this.directors.push(newdirector);
-
-        return newdirector;
+    async create(data){
+        const newUser = await models.Director.create(data)
+        return newUser;
     }
     async update(id, changes){
-        const director = await this.findOne(id)
-        const index = this.directors.findIndex((director)=>{
-            return director.idDirector == id
-        })
-        const updatedirector = {
-            ...director,
-            ...changes
-        }
-        this.directors[index] = updatedirector;
-        return updatedirector;
+        const director =  await this.findOne(id);
+        const response = await director.update(changes)
+        return response;
     }
     async delete(id){
-        await this.findOne(id)
-        const newdirector = this.directors.filter((director)=>{
-            return director.idDirector != id
-        })
-        this.directors = newdirector
-        return this.directors;
+        const director = await this.findOne(id)
+        await director.destroy()
+
+        return id;
     }
 }
 

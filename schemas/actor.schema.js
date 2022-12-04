@@ -6,18 +6,17 @@ const name = Joi.string();
 const age = Joi.number().integer();
 const country = Joi.string();
 const image = Joi.string();
-const movies = Joi.array();
+
 
 const createActorSchema = Joi.object({
     name: name.required(),
     age: age.required(),
     country: country.required(),
-    image: image.required(),
-    movies: movies.required()
+    image: image.required()
 })
 
 const updateActorSchema = Joi.object({
-    name, age, country, image, movies
+    name, age, country, image
   });
 
 const getActorSchema = Joi.object({

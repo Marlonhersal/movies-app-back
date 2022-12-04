@@ -7,7 +7,7 @@ const moviesService = require('./../services/movies.service');
 const service = new moviesService();
 //Validador de schemas
 const validatorHandler = require('../middlewares/validator.handler');
-const {getMovieSchema,createMovieSchema,updateMovieSchema} = require('../schemas/movie.schema');
+const {getMovieSchema,createMovieSchema,updateMovieSchema, createMovieActorSchema} = require('../schemas/movie.schema');
 
 router.get('/', async (req, res, next)=>{
     try{
@@ -35,8 +35,19 @@ router.post('/',
     validatorHandler(createMovieSchema, 'body'),
     async (req, res, next)=>{
     try{
-        const {name,director,actors,clasificacion,category, presentacion, poster} = req.body;
-        const response = await service.create(name,director,actors,clasificacion,category, presentacion, poster);
+        const response = await service.create(req.body);
+        res.json(response)
+    }
+    catch(err){
+        next(err)
+    }
+});
+
+router.post('/add-actor',
+    validatorHandler(createMovieActorSchema, 'body'),
+    async (req, res, next)=>{
+    try{
+        const response = await service.addActor(req.body);
         res.json(response)
     }
     catch(err){

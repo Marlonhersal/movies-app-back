@@ -1,73 +1,36 @@
 const {faker} =  require('@faker-js/faker')
+
 const boom = require('@hapi/boom');
-//Sequelize
-const sequelize = require('../libs/sequelize')
+
+//Conexión a la base de datos
+const {models} = require('../libs/sequelize')
 
 class actorsService {
     constructor (){
-        this.actors = [],
-        this.count = 0
-        this.generate()
     }
-    generate() {
-        
-        for(let i = 0; i < 30; i++){
-            let actor = {
-                idActor: ++this.count,
-                name: faker.name.findName(),
-                age:faker.datatype.number({ min: 20, max: 60 }) ,
-                country:  faker.address.country(),
-                image: faker.image.image(),
-                movies: [],
-            }
-            for(let i = 0; i < 5; i++){
-                actor.movies.push(faker.music.songName())
-            }
-            this.actors.push(actor)
-        }
-    }
-    
     async find(){
-        const query = 'SELECT * FROM tasks'
-        const [data] = await sequelize.query(query)
-        return data;
+        const response = await models.Actor.findAll()
+        return response;
     }
     async findOne(id){
-        const actor = this.actors.find((actor)=>{
-            return actor.idActor == id
-        })
-        if(!actor) throw boom.notFound('El actor no existe')
-        return actor
+        const director = await models.Actor.findByPk(id)
+        if(!director) throw boom.notFound('El actor no existe')
+        return director
     }
-    async create({name, age, country, image, movies}){
-        let newactor = {
-            idActor: ++this.count,
-            name, age, country, image, movies
-        }
-
-        this.actors.push(newactor);
-
-        return newactor;
+    async create(data){
+        const newUser = await models.Actor.create(data)
+        return newUser;
     }
     async update(id, changes){
-        const actor = await this.findOne(id)
-        const index = this.actors.findIndex((actor)=>{
-            return actor.idActor == id
-        })
-        const updateactor = {
-            ...actor,
-            ...changes
-        }
-        this.actors[index] = updateactor;
-        return updateactor;
+        const director =  await this.findOne(id);
+        const response = await director.update(changes)
+        return response;
     }
     async delete(id){
-        await this.findOne(id)
-        const newactor = this.actors.filter((actor)=>{
-            return actor.idActor != id
-        })
-        this.actors = newactor
-        return this.actors;
+        const director = await this.findOne(id)
+        await director.destroy()
+
+        return id;
     }
 }
 
