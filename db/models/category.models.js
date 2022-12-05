@@ -1,5 +1,4 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-
 const CATEGORY_TABLE = 'categories';
 
 const CategorySchema = {
@@ -13,10 +12,6 @@ const CategorySchema = {
       allowNull: false,
       type: DataTypes.STRING,
       unique: true,
-    },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false,
     },
     createdAt: {
       allowNull: false,

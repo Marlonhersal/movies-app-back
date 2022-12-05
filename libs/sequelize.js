@@ -2,12 +2,11 @@ const { Sequelize } = require('sequelize');
 const setupModels = require('../db/models')
 
 const {config}= require('../config/config')
-const URI = config.dbUrl;
-
+const URI = config.dbUrl
 
 const sequelize = new Sequelize(URI,{
     dialect: 'postgres',
-    logging: true
+    logging: false
 })
 
 //Implementando los modelos a la base de datos

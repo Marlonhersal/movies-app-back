@@ -45,6 +45,12 @@ const ActorSchema = {
 
 class Actor extends Model {
     static associate(models) {
+      this.belongsToMany(models.Movie, {
+        as: 'movies',
+        through: models.MovieActor,
+        foreignKey: 'actorId',
+        otherKey: 'movieId'
+      })
     }
     static config(sequelize){
         return {

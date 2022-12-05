@@ -13,7 +13,7 @@ class actorsService {
         return response;
     }
     async findOne(id){
-        const director = await models.Actor.findByPk(id)
+        const director = await models.Actor.findByPk(id, {include:'movies'})
         if(!director) throw boom.notFound('El actor no existe')
         return director
     }

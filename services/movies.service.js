@@ -1,4 +1,5 @@
-const {faker} =  require('@faker-js/faker')
+const {faker} =  require('@faker-js/faker');
+
 const boom = require('@hapi/boom');
 
 const {models} = require('../libs/sequelize')
@@ -8,7 +9,7 @@ class moviesService {
     }
     
     async find(){
-        const response = await models.Movie.findAll({include:'actor'})
+        const response = await models.Movie.findAll({include:'actors'})
         return response;
     }
     async findOne(id){

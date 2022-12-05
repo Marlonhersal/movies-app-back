@@ -63,7 +63,7 @@ class Movie extends Model {
         this.belongsTo(models.Director, {as: 'director'});
 
         this.belongsToMany(models.Actor, {
-          as: 'actor',
+          as: 'actors',
           through: models.MovieActor,
           foreignKey: 'movieId',
           otherKey: 'actorId'

@@ -24,11 +24,6 @@ const DirectorSchema = {
       type: DataTypes.STRING,
       unique: false,
     },
-    image: {
-      allowNull: false,
-      type: DataTypes.STRING,
-      unique: false,
-    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,
