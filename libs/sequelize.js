@@ -10,10 +10,13 @@ let options = {
 }
 
 if(config.isProd){
+    
     options.ssl = {
         rejectUnauthorized:  false
     }
 }
+
+console.log(options)
 
 const sequelize = new Sequelize(URI, options)
 
