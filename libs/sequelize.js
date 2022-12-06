@@ -11,11 +11,11 @@ let options = {
 
 if(config.isProd){
     options.ssl = {
-        rejectUnauthorized:  false
+        rejectUnauthorized:
     }
 }
 
-const sequelize = new Sequelize(URI, options)
+const sequelize = new Sequelize(URI,)
 
 //Implementando los modelos a la base de datos
 setupModels(sequelize)
