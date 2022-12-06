@@ -7,17 +7,19 @@ module.exports = {
     production: {
         url: URI,
         dialect: 'postgres',
-        ssl : {
-            rejectUnauthorized:  false
+        dialectOptions: {
+            ssl: {
+              rejectUnauthorized: false
+            }
         }
-    },
-    development: {
+    }
+   /*  development: {
         url: URI,
         dialect: 'postgres',
         dialectOptions: {
             ssl: {
               rejectUnauthorized: false
             }
-          }
-    }
+        }
+    } */
 }
