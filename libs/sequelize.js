@@ -4,10 +4,18 @@ const setupModels = require('../db/models')
 const {config}= require('../config/config')
 const URI = config.dbUrl
 
-const sequelize = new Sequelize(URI,{
+let options = {
     dialect: 'postgres',
-    logging: false
-})
+    logging: config.isProd ? false: true,
+}
+
+if(config.isProd){
+    options.ssl = {
+        rejectUnauthorized:  false
+    }
+}
+
+const sequelize = new Sequelize(URI, options)
 
 //Implementando los modelos a la base de datos
 setupModels(sequelize)
