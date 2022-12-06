@@ -12,8 +12,8 @@ module.exports = {
               rejectUnauthorized: false
             }
         }
-    }
-   /*  development: {
+    },
+    development: {
         url: URI,
         dialect: 'postgres',
         dialectOptions: {
@@ -21,5 +21,5 @@ module.exports = {
               rejectUnauthorized: false
             }
         }
-    } */
+    }
 }

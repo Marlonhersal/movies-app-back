@@ -15,7 +15,7 @@ if(config.isProd){
     }
 }
 
-const sequelize = new Sequelize(URI,)
+const sequelize = new Sequelize(URI,options)
 
 //Implementando los modelos a la base de datos
 setupModels(sequelize)
