@@ -6,17 +6,14 @@ const URI = config.dbUrl
 
 let options = {
     dialect: 'postgres',
-    logging: false,
-    ssl : {
-        rejectUnauthorized:  false
-    }
+    logging: config.isProd ? false: true,
 }
-/* 
-if(config.isProd){    
+
+if(config.isProd){
     options.ssl = {
         rejectUnauthorized:  false
     }
-} */
+}
 
 const sequelize = new Sequelize(URI, options)
 

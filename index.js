@@ -5,6 +5,8 @@ const port = process.env.PORT|| 3000;
 
 const cors = require('cors');
 
+const {config}= require('./config/config')
+
 //Routing
 const routerApi = require('./routes/index')
 //Importando Middlewares
@@ -17,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res)=>{
-    res.send('API DE PELÍCULAS')
+    res.send('API DE PELÍCULAS', config.isProd)
 })
 
 //Conectando con el Routing
