@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res)=>{
-    res.send('API DE PELÍCULAS')
+    res.send('API DE PELÍCULAS' + process.env.DATABASE_URL)
 })
 
 //Conectando con el Routing
