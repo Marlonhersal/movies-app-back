@@ -4,12 +4,15 @@ const URI = config.dbUrl;
 
 
 module.exports = {
-
     production: {
         url: URI,
         dialect: 'postgres',
         ssl : {
             rejectUnauthorized:  false
         }
+    },
+    development: {
+        url: URI,
+        dialect: 'postgres'
     }
 }
