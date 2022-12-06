@@ -32,7 +32,7 @@ app.use(queryErrorHandler)
 app.use(errorHandler)
 
 app.listen(port, ()=>{
-    console.log('Aplicación corriendo en el puerto ' + port)
+    console.log('Aplicación corriendo en el puerto ' + port + " " + config.isProd)
 });
 
 module.exports = app 

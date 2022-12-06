@@ -11,7 +11,7 @@ let options = {
 
 if(config.isProd){
     options.ssl = {
-        rejectUnauthorized:
+        rejectUnauthorized:false
     }
 }
 
