@@ -7,7 +7,11 @@ const actorsService = require('./../services/actors.service');
 const service = new actorsService();
 //Validador de schemas
 const validatorHandler = require('../middlewares/validator.handler');
+const {checkAdminRole} = require('../middlewares/auth.handler');
 const {createActorSchema,updateActorSchema,getActorSchema} = require('../schemas/actor.schema');
+
+
+const passport = require('passport')
 
 router.get('/',async (req, res, next)=>{
     try{
@@ -32,6 +36,9 @@ router.get('/:id',
 });
 
 router.post('/',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole
+    ,
     validatorHandler(createActorSchema, 'body')
     ,async (req, res, next)=>{
     try{

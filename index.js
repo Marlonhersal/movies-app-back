@@ -5,12 +5,12 @@ const port = process.env.PORT|| 3000;
 
 const cors = require('cors');
 
-const {config}= require('./config/config')
-
 //Routing
 const routerApi = require('./routes/index')
 //Importando Middlewares
 const {errorHandler,boomErrorHandler, queryErrorHandler} = require('./middlewares/error.handler')
+const {checkApiKey} = require('./middlewares/auth.handler');
+const { request } = require('express');
 
 
 //Convirtiendo las repuestas en JSON
@@ -18,8 +18,15 @@ app.use(express.json());
 
 app.use(cors());
 
+require('./utils/auth/index')
+
 app.get('/', (req, res)=>{
-    res.send('API DE PELÍCULAS', config.isProd)
+    res.send('API DE PELÍCULAS')
+})
+app.get('/test',
+    checkApiKey
+    ,(req, res)=>{
+    res.send('Autorizado')
 })
 
 //Conectando con el Routing
@@ -32,7 +39,7 @@ app.use(queryErrorHandler)
 app.use(errorHandler)
 
 app.listen(port, ()=>{
-    console.log('Aplicación corriendo en el puerto ' + port + " " + config.isProd)
+    console.log('Aplicación corriendo en el puerto ' + port )
 });
 
 module.exports = app 
