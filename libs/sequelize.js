@@ -10,8 +10,10 @@ let options = {
 }
 
 if(config.isProd){
-    options.ssl = {
+    options.dialectOptions ={
+        ssl: {
         rejectUnauthorized:false
+        }
     }
 }
 
