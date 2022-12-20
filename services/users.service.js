@@ -1,6 +1,6 @@
 const {faker} =  require('@faker-js/faker')
 const boom = require('@hapi/boom');
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
 
 //Conexión a la base de datos
@@ -42,8 +42,7 @@ class UsersService {
         return user
     }
     async create(data){
-        //const hash = await bcrypt.hash(data.password, 10)
-        const hash = await data.password;
+        const hash = await bcrypt.hash(data.password, 10)
         const newUser = await models.User.create({
             ...data,
         password: hash}
