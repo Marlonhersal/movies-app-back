@@ -1,8 +1,6 @@
 const {config}= require('../config/config')
 
 const URI = config.dbUrl;
-console.log('Ejemplo', config.isProd)
-
 
 module.exports = {
     production: {
@@ -12,7 +10,7 @@ module.exports = {
             ssl: {
               rejectUnauthorized: false
             }
-        }
+          }
     },
     development: {
         url: URI,
