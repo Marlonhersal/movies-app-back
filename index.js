@@ -1,5 +1,6 @@
 //Express
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const port = process.env.PORT|| 3000;
 
@@ -12,6 +13,7 @@ const {errorHandler,boomErrorHandler, queryErrorHandler} = require('./middleware
 const {checkApiKey} = require('./middlewares/auth.handler');
 const { request } = require('express');
 
+app.use(cookieParser());
 
 //Convirtiendo las repuestas en JSON
 app.use(express.json());

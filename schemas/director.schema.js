@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
 const id = Joi.number().integer();
 
@@ -7,20 +7,26 @@ const age = Joi.number().integer();
 const country = Joi.string();
 const image = Joi.string();
 
-
 const createDirectorSchema = Joi.object({
-    name: name.required(),
-    age: age.required(),
-    country: country.required(),
-    image: image.required()
-})
+  name: name.required(),
+  age: age.required(),
+  country: country.required(),
+  image: image.required(),
+});
 
 const updateDirectorSchema = Joi.object({
-    name, age, country, image
-  });
+  name,
+  age,
+  country,
+  image,
+});
 
 const getDirectorSchema = Joi.object({
-    id: id.required()
-})
+  id: id.required(),
+});
 
-module.exports = {createDirectorSchema, updateDirectorSchema,getDirectorSchema};
+module.exports = {
+  createDirectorSchema,
+  updateDirectorSchema,
+  getDirectorSchema,
+};

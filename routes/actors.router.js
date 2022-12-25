@@ -51,6 +51,8 @@ router.post('/',
 });
 
 router.patch('/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getActorSchema, 'params'),
     validatorHandler(updateActorSchema, 'body')
     ,async (req, res, next)=>{
@@ -64,6 +66,8 @@ router.patch('/:id',
 });
 
 router.delete('/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getActorSchema, 'params')
     ,async (req, res, next)=>{
     try{

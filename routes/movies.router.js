@@ -6,10 +6,15 @@ const router = express.Router()
 const moviesService = require('./../services/movies.service');
 const service = new moviesService();
 //Validador de schemas
+const {checkAdminRole} = require('../middlewares/auth.handler');
 const validatorHandler = require('../middlewares/validator.handler');
 const {getMovieSchema,createMovieSchema,updateMovieSchema, createMovieActorSchema} = require('../schemas/movie.schema');
+//JWT
+const passport = require('passport')
 
-router.get('/', async (req, res, next)=>{
+router.get('/', 
+    passport.authenticate('jwt', {session:false})
+    ,async (req, res, next)=>{
     try{
         const response = await service.find();
         res.json(response)
@@ -32,6 +37,8 @@ router.get('/:id',
 });
 
 router.post('/',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(createMovieSchema, 'body'),
     async (req, res, next)=>{
     try{
@@ -44,6 +51,8 @@ router.post('/',
 });
 
 router.post('/add-actor',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(createMovieActorSchema, 'body'),
     async (req, res, next)=>{
     try{
@@ -56,6 +65,8 @@ router.post('/add-actor',
 });
 
 router.patch('/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getMovieSchema, 'params'),
     validatorHandler(updateMovieSchema, 'body')
     ,async (req, res, next)=>{
@@ -69,6 +80,8 @@ router.patch('/:id',
 });
 
 router.delete('/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getMovieSchema, 'params')
     , async (req, res, next)=>{
     try{

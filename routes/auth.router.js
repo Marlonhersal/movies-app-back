@@ -1,6 +1,7 @@
 //Express
 const express = require('express')
 //Rutas
+const {serialize} = require('cookie')
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -15,13 +16,23 @@ router.post('/login',
         const user = req.user;
         const payload = {
             sub: user.id,
-            role: user.role
+            name: user.name,
+            email: user.email
         }
         const token = jwt.sign(payload, config.jwtSecret)
+       /*  const cookie = serialize('TokenJWT', token,{
+            httpOnly:true,
+            secure: config.isProd? true: false,
+            sameSite: 'none',
+            maxAge: 1000 *60 *60*24*30,
+            path: '/'
+        }) */
+        //res.cookie('tokens', token, { domain: 'http://localhost:3005/', path: '/login' })
         res.json({
-            user,
+            message: "Usuario logeado correctamenre",
             token
         })
+
     }
     catch(err){
         next(err)

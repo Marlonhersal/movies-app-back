@@ -7,9 +7,12 @@ const UsersService = require('./../services/users.service');
 const service = new UsersService();
 
 //Validador de schemas
+const {checkAdminRole} = require('../middlewares/auth.handler');
 const validatorHandler = require('../middlewares/validator.handler');
 const {getUserSchema,createUserSchema,updateUserSchema} = require('../schemas/user.schema');
 
+//JWT
+const passport = require('passport')
 
 router.get('/', async (req, res, next)=>{
     try{
@@ -38,7 +41,7 @@ router.post('/',
     ,async (req, res, next)=>{
     try{
         const response = await service.create(req.body);
-        res.json(response)
+        res.status(200).json(response)
     }
     catch(err){
         next(err)
@@ -46,6 +49,8 @@ router.post('/',
 });
 
 router.patch('/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getUserSchema, 'params'),
     validatorHandler(updateUserSchema, 'body')
     ,async (req, res, next)=>{
@@ -59,6 +64,8 @@ router.patch('/:id',
 });
 
 router.delete('/:id', 
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getUserSchema, 'params')
     ,async (req, res, next)=>{
     try{
@@ -69,7 +76,5 @@ router.delete('/:id',
         next(err)
     }
 });
-
-
 
 module.exports = router

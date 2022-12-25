@@ -6,8 +6,12 @@ const router = express.Router()
 const directorsService = require('./../services/directors.service');
 const service = new directorsService();
 //Validador de schemas
+const {checkAdminRole} = require('../middlewares/auth.handler');
 const validatorHandler = require('../middlewares/validator.handler');
 const {createDirectorSchema,updateDirectorSchema,getDirectorSchema} = require('../schemas/director.schema');
+
+//jwt
+const passport = require('passport')
 
 router.get('/', async (req, res, next)=>{
     try{
@@ -32,6 +36,8 @@ router.get('/:id',
 });
 
 router.post('/',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(createDirectorSchema, 'body')
     ,async (req, res, next)=>{
     try{
@@ -44,6 +50,8 @@ router.post('/',
 });
 
 router.patch('/:id', 
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getDirectorSchema, 'params'),
     validatorHandler(updateDirectorSchema, 'body')
     ,async (req, res, next)=>{
@@ -57,6 +65,8 @@ router.patch('/:id',
 });
 
 router.delete('/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
     validatorHandler(getDirectorSchema, 'params')
     ,async (req, res, next)=>{
     try{
