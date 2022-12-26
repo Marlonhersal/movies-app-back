@@ -8,24 +8,7 @@ const {models} = require('../libs/sequelize')
 
 
 class UsersService {
-    constructor (){
-        /* this.users = []
-        this.count = 0
-        this.generate() */
-    }
-    /* generate() {
-        for(let i = 0; i < 30; i++){
-            this.users.push({
-                idUser: ++this.count,
-                email: faker.internet.email() ,
-                password: "contraseña",
-                name: faker.name.firstName(),
-                age:"12",
-                role:  this.count % 2 ? 'c4lient' : 'admin'
-            })
-        }
-    } */
-
+    
     async find(){
         const response = await models.User.findAll()
         return response;

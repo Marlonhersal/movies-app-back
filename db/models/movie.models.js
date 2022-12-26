@@ -26,6 +26,11 @@ const MovieSchema = {
       type: DataTypes.STRING,
       unique: false,
     },
+    description: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: false,
+    },
     poster: {
       allowNull: false,
       type: DataTypes.STRING,

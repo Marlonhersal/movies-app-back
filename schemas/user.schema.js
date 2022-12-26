@@ -1,26 +1,28 @@
+//Libreria para la validación
 const Joi = require("joi");
 
+//Atributos
 const id = Joi.number().integer();
 const email = Joi.string().email();
 const password = Joi.string().min(8);
 const name = Joi.string();
-//const age = Joi.number().integer();
-const role = Joi.string().min(5);
+const role = Joi.string().valid("customer", "admin");
 
+//Creación de usuario
 const createUserSchema = Joi.object({
+  name: name.required(),
   email: email.required(),
   password: password.required(),
-  name: name.required(),
-  //age:age.required(),
-  role:role.required(),
+  role: role.required(),
 });
 
+//Actualizar usuario
 const updateUserSchema = Joi.object({
+  name,
   email,
   password,
-  name,
 });
-
+//Detalles de un usuario
 const getUserSchema = Joi.object({
   id: id.required(),
 });

@@ -13,7 +13,9 @@ const {createDirectorSchema,updateDirectorSchema,getDirectorSchema} = require('.
 //jwt
 const passport = require('passport')
 
-router.get('/', async (req, res, next)=>{
+router.get('/',
+    passport.authenticate('jwt', {session:false}),
+    async (req, res, next)=>{
     try{
         const response = await service.find();
         res.json(response)
@@ -24,6 +26,7 @@ router.get('/', async (req, res, next)=>{
 });
 
 router.get('/:id',
+    passport.authenticate('jwt', {session:false}),
     validatorHandler(getDirectorSchema, 'params')
     ,async (req, res, next)=>{
     try{

@@ -14,7 +14,10 @@ const {getUserSchema,createUserSchema,updateUserSchema} = require('../schemas/us
 //JWT
 const passport = require('passport')
 
-router.get('/', async (req, res, next)=>{
+router.get('/',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
+    async (req, res, next)=>{
     try{
         const response = await service.find();
         res.json(response)
@@ -25,6 +28,7 @@ router.get('/', async (req, res, next)=>{
 });
 
 router.get('/:id',
+    passport.authenticate('jwt', {session:false}),
     validatorHandler(getUserSchema, 'params')
     ,async (req, res, next)=>{
     try{
