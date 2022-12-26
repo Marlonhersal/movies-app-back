@@ -6,7 +6,7 @@ const id = Joi.number().integer();
 const name = Joi.string();
 const country = Joi.string();
 const birthdate = Joi.date().iso();
-const description = Joi.string();
+const description = Joi.string().max(250);
 const image = Joi.string();
 
 //Creación de actores
