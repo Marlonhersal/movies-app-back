@@ -4,6 +4,7 @@ const Joi = require("joi");
 //Atributos
 const id = Joi.number().integer();
 const name = Joi.string();
+const duration = Joi.string();
 const year = Joi.number().integer();
 const country = Joi.string();
 const description = Joi.string().max(250);
@@ -15,6 +16,7 @@ const actorId = Joi.number().integer();
 //Creación de pelicula
 const createMovieSchema = Joi.object({
   name: name.required(),
+  duration: duration.required(),
   year: year.required(),
   country: country.required(),
   description: description.required(),
@@ -30,6 +32,7 @@ const createMovieActorSchema = Joi.object({
 //Actualizar pelicula
 const updateMovieSchema = Joi.object({
   name,
+  duration,
   year,
   country,
   description,

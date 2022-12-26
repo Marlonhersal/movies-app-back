@@ -16,6 +16,11 @@ const MovieSchema = {
       type: DataTypes.STRING,
       unique: true,
     },
+    duration:{
+      allowNull: false,
+      type: DataTypes.STRING,
+      unique: false,
+    },
     year: {
       allowNull: false,
       type: DataTypes.STRING,
