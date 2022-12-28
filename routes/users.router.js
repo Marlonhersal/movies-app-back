@@ -26,7 +26,6 @@ router.get('/',
         next(err)
     }
 });
-
 router.get('/:id',
     passport.authenticate('jwt', {session:false}),
     validatorHandler(getUserSchema, 'params')

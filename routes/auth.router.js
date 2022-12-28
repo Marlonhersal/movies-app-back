@@ -5,9 +5,12 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { config } = require("../config/config");
+const validatorHandler = require('../middlewares/validator.handler');
+const {loginSchema} = require('../schemas/user.schema');
 
 router.post(
   "/login",
+  validatorHandler(loginSchema, 'body'),
   passport.authenticate("local", { session: false }),
   async (req, res, next) => {
     try {

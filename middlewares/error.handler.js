@@ -17,14 +17,15 @@ function boomErrorHandler(err, req, res, next) {
 function queryErrorHandler(err, req, res, next) {
   if (err.parent) {
     const { fields, parent } = err;
-    res.status(500).json({
+    res.status(400).json({
+      statusCode: 400,
       field: fields,
       message: parent.detail,
     });
   }
   next(err);
 }
-  
+
 
 
 module.exports = {errorHandler, boomErrorHandler, queryErrorHandler};
