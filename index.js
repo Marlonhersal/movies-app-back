@@ -23,7 +23,7 @@ app.use(cors());
 require('./utils/auth/index')
 
 app.get('/', (req, res)=>{
-    res.send('API DE PELÍCULAS')
+    res.send('API de peliculas')
 })
 app.get('/test',
     checkApiKey
