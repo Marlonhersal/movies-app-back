@@ -64,6 +64,19 @@ router.post('/add-actor',
         next(err)
     }
 });
+router.post('/remove-actor/:id',
+    passport.authenticate('jwt', {session:false}),
+    checkAdminRole,
+    validatorHandler(getMovieSchema, 'params'),
+    async (req, res, next)=>{
+    try{
+        const response = await service.removeActor(req.params.id);
+        res.json(response)
+    }
+    catch(err){
+        next(err)
+    }
+});
 
 router.patch('/:id',
     passport.authenticate('jwt', {session:false}),

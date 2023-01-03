@@ -103,7 +103,6 @@ module.exports = {
     });
     await queryInterface.createTable(MOVIE_ACTOR_TABLE, MovieActorsSchema);
   },
-
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable(USER_TABLE);
     await queryInterface.dropTable(DIRECTOR_TABLE);

@@ -12,7 +12,7 @@ class moviesService {
     return response;
   }
   async findOne(id) {
-    const movie = await models.Movie.findByPk(id);
+    const movie = await models.Movie.findByPk(id,{ include: "actors" });
     if (!movie) throw boom.notFound("La película no existe");
     return movie;
   }
@@ -23,6 +23,12 @@ class moviesService {
   async addActor(data) {
     const newMovieActor = await models.MovieActor.create(data);
     return newMovieActor;
+  }
+  async removeActor(id) {
+    const relacion = await models.MovieActor.findByPk(id);
+    if (!relacion) throw boom.notFound("Dios no existe");
+    await relacion.destroy()
+    return id;
   }
   async update(id, changes) {
     const movie = await this.findOne(id);

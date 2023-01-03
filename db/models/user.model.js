@@ -22,11 +22,6 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  age: {
-    allowNull: false,
-    type: DataTypes.INTEGER(),
-    defaultValue: 18,
-  },
   role: {
     allowNull: false,
     type: DataTypes.STRING,
