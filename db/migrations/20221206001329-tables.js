@@ -35,8 +35,7 @@ module.exports = {
       },
       description: {
         allowNull: false,
-        type: DataTypes.STRING,
-        unique: false,
+        type: DataTypes.STRING(500),
       },
       image: {
         allowNull: false,
@@ -56,6 +55,7 @@ module.exports = {
         defaultValue: Sequelize.NOW,
       },
     });
+
     await queryInterface.createTable(MOVIE_TABLE, MovieSchema);
     await queryInterface.createTable(ACTOR_TABLE, {
       id: {
@@ -80,8 +80,7 @@ module.exports = {
       },
       description:{
         allowNull:false,
-        type: DataTypes.STRING,
-        unique: false,
+        type: DataTypes.STRING(500)
       },
       image: {
         allowNull: false,

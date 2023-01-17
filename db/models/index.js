@@ -7,7 +7,6 @@ const {MovieActor, MovieActorsSchema} = require('./movie-actor')
 
 function setupModels(sequelize){
     User.init(UserSchema, User.config(sequelize))
-
     Director.init(DirectorSchema, Director.config(sequelize))
     Movie.init(MovieSchema, Movie.config(sequelize))
     Actor.init(ActorSchema, Actor.config(sequelize))

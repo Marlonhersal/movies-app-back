@@ -5,7 +5,7 @@ services:
     image: postgres:13
     environment:
       - POSTGRES_DB=app_movies
-      - POSTGRES_USER=marlon
+      - POSTGRES_USER= 
       - POSTGRES_PASSWORD=admin123
     ports:
       - 5432:5432

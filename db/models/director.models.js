@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require("sequelize");
+
 const moment = require('moment');
 
 const DIRECTOR_TABLE = "directors";
@@ -32,8 +33,8 @@ const DirectorSchema = {
   },
   description: {
     allowNull: false,
-    type: DataTypes.STRING,
-    unique: false,
+    type: DataTypes.STRING(500),
+    allowNull: false,
   },
   image: {
     allowNull: false,

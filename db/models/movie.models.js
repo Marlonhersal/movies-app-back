@@ -33,8 +33,7 @@ const MovieSchema = {
     },
     description: {
       allowNull: false,
-      type: DataTypes.STRING,
-      unique: false,
+      type: DataTypes.STRING(500)
     },
     poster: {
       allowNull: false,

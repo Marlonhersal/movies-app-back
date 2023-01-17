@@ -7,7 +7,7 @@ const name = Joi.string();
 const duration = Joi.string();
 const year = Joi.number().integer();
 const country = Joi.string();
-const description = Joi.string().max(250);
+const description = Joi.string().min(400).max(500);
 const poster = Joi.string();
 const directorId = Joi.number().integer();
 const movieId = Joi.number().integer();
@@ -23,6 +23,7 @@ const createMovieSchema = Joi.object({
   poster: poster.required(),
   directorId: directorId.required(),
 });
+
 //Agregar actor a pelicula
 const createMovieActorSchema = Joi.object({
   movieId: movieId.required(),
